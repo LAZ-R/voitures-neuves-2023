@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="fr" id="html">
+  <head>
+    <meta charset="utf-8">
+    <title id="title">Voitures neuves 2023</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="./medias/app-maskable-icons/app_icon_152.png">
+    <meta name="description" content="Visualisation de données des ventes de voitures neuves en France en 2023">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 viewport-fit=cover">
+    <meta name="theme-color" content="#2e2a3c"/>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="" id="appleTitle">
+    <meta name="msapplication-TileImage" content="./medias/app-maskable-icons/app_icon_144.png">
+    <meta name="msapplication-TileColor" content="#2e2a3c">
+  </head>
+
+  <body id="body">
+    <main id="main" class="main">
+      <div class="header">
+        <div id="subDivisionComprehensive" class="header-sub-division selected">
+          <input type="radio" name="dataOrganization" id="comprehensive" value="comprehensive" onchange="onDataOrganizationChange('comprehensive')" />
+          <label for="comprehensive">Simple</label>
+        </div>
+        <divv id="subDivisionDetailed" class="header-sub-division">
+          <input type="radio" name="dataOrganization" id="detailed" value="detailed" onchange="onDataOrganizationChange('detailed')" />
+          <label for="detailed">Avancé</label>
+        </div>
+      </div>
+
+      <div class="data-viewer">
+        <div id="tableContainer" class="table-container">
+          
+        </div>
+      </div>
+    </main>
+  </body>
+
+  <script type="module" src="./script.js"></script>
+
+</html>

@@ -1,0 +1,215 @@
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+:root {
+  --color--surface-0: #2e2a3c;
+  --color--surface-10: hsl(253, 18%, 18%);
+  --color--surface-20: hsl(253, 10%, 16%);
+  --color--surface-30: hsl(253, 10%, 14%);
+  --color--surface-40: hsl(253, 10%, 12%);
+
+  /* --color--surface-40: #00ffff;
+  --color--surface-40: #ff00b3;
+  --color--surface-40: #6aff00;
+  --color--surface-40: #6e7ef7;
+  --color--surface-40: #ff2b00; */
+
+  --color-on-surface: #cfcfcf;
+}
+
+html, body {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  min-width: 100svw; width: 100svw; max-width: 100svw;
+  min-height: 100svh; height: 100svh; max-height: 100svh;
+  background-color: black;
+  overflow: hidden;
+
+  main {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-width: 100svw; width: 100svw; max-width: 100svw;
+    min-height: 100svh; height: 100svh; max-height: 100svh;
+    background-color: var(--color--surface-0);
+
+    .header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      background-color: var(--color--surface-0);
+      color: var(--color-on-surface);
+
+      .header-sub-division {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50%;
+        height: 5svh;
+
+        &.selected {
+          background-color: var(--color--surface-10);
+          border-radius: 10px 10px 0 0;
+        }
+
+        input {
+          background-color: red;
+          width: 100%;
+          height: 100%;
+          opacity: 0;
+        }
+
+        label {
+          position: absolute;
+        }
+      }
+    }
+
+    .data-viewer {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      width: 100%;
+      min-height: 95svh; height: 95svh; max-height: 95svh;
+      color: var(--color-on-surface);
+      overflow: hidden;
+      background-color: var(--color--surface-10);
+      border-radius: 0 0 10px 10px;
+
+      .table-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 95%;
+        padding: 24px 0;
+        gap: 24px;
+       /*  background-color: aqua; */
+
+        h1 {
+          margin: 0;
+          font-size: 16px;
+          text-align: center;
+        }
+
+        table {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          align-items: flex-start;
+          font-size: 12px;
+          background-color: black;
+          min-width: 100%; width: 100%; max-width: 100%;
+          /* min-height: 20svh; height: 20svh; max-height: 20svh; */
+          border: none;
+          border-radius: 8px;
+          border-collapse: collapse;
+          overflow: hidden;
+          -webkit-box-shadow: 0px 5px 11px 4px rgba(0,0,0,0.33);
+          -moz-box-shadow: 0px 5px 11px 4px rgba(0,0,0,0.33);
+          box-shadow: 0px 5px 11px 4px rgba(0,0,0,0.33);
+
+          thead {
+            min-width: 100%; width: 100%; max-width: 100%;
+            background-color: var(--color--surface-40);
+            font-weight: 600;
+
+            th {
+              padding: 8px;
+              /* min-width: 20%; width: 20%; max-width: 20%; */
+
+              &:nth-child(1) {
+                /* background-color: yellow; */
+              }
+              &:nth-child(2) {
+                /* background-color: red; */
+              }
+              &:nth-child(3) {
+                /* background-color: cyan; */
+              }
+              &:nth-child(4) {
+                /* background-color: green; */
+              }
+              &:nth-child(5) {
+                /* background-color: purple; */
+              }
+            }
+          }
+
+          tbody {
+            min-width: 100%; width: 100%; max-width: 100%;
+            min-height: fit-content; height: fit-content; max-height: 50svh;
+            overflow: hidden;
+            overflow-y: scroll;
+
+            tr {
+              min-width: 100%; width: 100%; max-width: 100%;
+              background-color: var(--color--surface-30);
+
+              &:nth-child(even) {
+                background-color: var(--color--surface-20);
+              }
+
+              td {
+                text-align: end;
+                padding: 16px 8px;
+                min-width: 20%; width: 20%; max-width: 20%; 
+                
+                &:first-of-type {
+                  font-weight: 600;
+                  text-align: start;
+                }
+              }
+            }
+          }
+        }
+
+        .progress-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-width: 100%; width: 100%; max-width: 100%;
+          min-height: 20px; height: 20px; max-height: 20px;
+          border-radius: 4px;
+          overflow: hidden;
+          /* background-color: red; */
+
+          .progress-part {
+            display: flex;
+            min-height: 100%; height: 100%; max-height: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+
+.highlight {
+  font-weight: 800;
+  font-size: 22px;
+  color: white
+}
+
+.row-cell {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  .dot {
+    display: flex;
+    min-width: 8px; width: 8px; max-width: 8px;
+    min-height: 8px; height: 8px; max-height: 8px;
+    border-radius: 500px;
+    margin-right: 8px;
+  }
+}
