@@ -1,61 +1,28 @@
 import { TYPES } from "./data/types.js";
 import { BRANDS } from "./data/brands.js";
 
-const COLORS = [
-  /* 'hsl(180, 100%, 50%)',
-  'hsl(108, 100%, 50%)',
-  'hsl(54, 100%, 50%)', 
-  'hsl(36, 100%, 50%)', 
-  'hsl(18, 100%, 50%)', 
-  'hsl(0, 100%, 50%)', 
-  'hsl(342, 100%, 50%)',
-  'hsl(324, 100%, 50%)',
-  'hsl(306, 100%, 50%)',
-  'hsl(288, 100%, 60%)',
-  'hsl(270, 100%, 60%)', 
-  'hsl(252, 100%, 70%)',
-  'hsl(234, 100%, 70%)',
-  'hsl(216, 100%, 60%)',
-  'hsl(198, 100%, 55%)',
+const COLORS = [];
 
-  'hsl(0, 100%, 60%)', 
-  'hsl(18, 100%, 60%)', 
-  'hsl(36, 100%, 50%)', 
-  'hsl(54, 100%, 50%)', 
-  'hsl(90, 100%, 50%)',
-  'hsl(108, 100%, 50%)',
-  'hsl(126, 100%, 50%)',
-  'hsl(144, 100%, 50%)',
-  'hsl(162, 100%, 50%)',
-  'hsl(180, 100%, 50%)',
-  'hsl(198, 100%, 55%)',
-  'hsl(216, 100%, 60%)',
-  'hsl(234, 100%, 70%)',
-  'hsl(252, 100%, 70%)',
-  'hsl(270, 100%, 60%)',
-  'hsl(288, 100%, 60%)',
-  'hsl(306, 100%, 50%)',
-  'hsl(324, 100%, 60%)',
-  'hsl(342, 100%, 60%)', */
-];
+const fillColorsArray = () => {
+  const goldenAngle = 137.5;
 
-let hue = 180//Math.random() * 360; // Démarrage à une teinte aléatoire
-let saturation = 100;
-let lightness = 50;
-const goldenAngle = 137.5;
-
-for (let i = 0; i < 20; i++) {
-  COLORS.push(`hsl(${Math.round(hue % 360)}, ${saturation}%, ${lightness}%)`);
-  hue += goldenAngle;
-  if (hue > 360) {
-    hue = hue - 360
-  }
-  if (hue >= 200 && hue < 300) {
-    saturation = 90;
-    lightness = 70;
-  } else {
-    saturation = 100;
-    lightness = 50;
+  let hue = 180;
+  let saturation = 100;
+  let lightness = 50;
+  
+  for (let i = 0; i < 20; i++) {
+    COLORS.push(`hsl(${Math.round(hue % 360)}, ${saturation}%, ${lightness}%)`);
+    hue += goldenAngle;
+    if (hue > 360) {
+      hue = hue - 360
+    }
+    if (hue >= 200 && hue < 300) {
+      saturation = 90;
+      lightness = 70;
+    } else {
+      saturation = 100;
+      lightness = 50;
+    }
   }
 }
 
@@ -151,22 +118,22 @@ const getUrbansSalesData = () => {
   let obj = { name: 'Citadines et compactes', units: units, salesPercentage: getRoundedPercentage(units, totalUnits) };
   return obj;
 }
-const getSportSalesData = () => {
-  let FILTERED_TYPED_SALES_DATA = DETAILED_TYPES_SALES_DATA.filter((o) => o.id == 'S');
+const getVanSalesData = () => {
+  let FILTERED_TYPED_SALES_DATA = DETAILED_TYPES_SALES_DATA.filter((o) => o.id == o.id == 'LUDO' || o.id == 'B-MPV' || o.id == 'C-MPV' || o.id == 'D-MPV');
   let units = 0;
   FILTERED_TYPED_SALES_DATA.forEach(type => {
     units += type.units;
   });
-  let obj = { name: 'Sportives', units: units, salesPercentage: getRoundedPercentage(units, totalUnits) };
+  let obj = { name: 'Ludospaces et Monospaces', units: units, salesPercentage: getRoundedPercentage(units, totalUnits) };
   return obj;
 }
 const getOthersSalesData = () => {
-  let FILTERED_TYPED_SALES_DATA = DETAILED_TYPES_SALES_DATA.filter((o) => o.id == 'LUDO' || o.id == 'B-MPV' || o.id == 'C-MPV' || o.id == 'D-MPV' || o.id == 'PCKP-S' || o.id == 'PCKP-M' || o.id == 'PCKP-L' || o.id == 'VUL');
+  let FILTERED_TYPED_SALES_DATA = DETAILED_TYPES_SALES_DATA.filter((o) => o.id == o.id == 'PCKP-S' || o.id == 'PCKP-M' || o.id == 'PCKP-L' || o.id == 'VUL' || o.id == 'S');
   let units = 0;
   FILTERED_TYPED_SALES_DATA.forEach(type => {
     units += type.units;
   });
-  let obj = { name: 'Autres (Ludospaces, Monospaces, Pick-up, Utilitaires)', units: units, salesPercentage: getRoundedPercentage(units, totalUnits) };
+  let obj = { name: 'Autres (Pick-up, Utilitaires, Sportives)', units: units, salesPercentage: getRoundedPercentage(units, totalUnits) };
   return obj;
 }
 
@@ -180,8 +147,8 @@ const fillComprehensiveTypesSalesData = () => {
   let urbansSalesData = getUrbansSalesData();
   COMPREHENSIVE_TYPES_SALES_DATA.push(urbansSalesData);
 
-  let sportSalesData = getSportSalesData();
-  COMPREHENSIVE_TYPES_SALES_DATA.push(sportSalesData);
+  let vansSalesData = getVanSalesData();
+  COMPREHENSIVE_TYPES_SALES_DATA.push(vansSalesData);
 
   let othersSalesData = getOthersSalesData();
   COMPREHENSIVE_TYPES_SALES_DATA.push(othersSalesData);
@@ -227,14 +194,14 @@ const getUrbansDiversityData = () => {
   let obj = { name: 'Citadines et compactes', models: models, diversityPercentage: getRoundedPercentage(models, totalModels) };
   return obj;
 }
-const getSportDiversityData = () => {
-  let models = getTypeTotalModels('S');
-  let obj = { name: 'Sportives', models: models, diversityPercentage: getRoundedPercentage(models, totalModels) };
+const getVanDiversityData = () => {
+  let models = getTypeTotalModels('LUDO') + getTypeTotalModels('B-MPV') + getTypeTotalModels('C-MPV') + getTypeTotalModels('D-MPV');
+  let obj = { name: 'Ludospaces et Monospaces', models: models, diversityPercentage: getRoundedPercentage(models, totalModels) };
   return obj;
 }
 const getOthersDiversityData = () => {
-  let models = getTypeTotalModels('LUDO') + getTypeTotalModels('B-MPV') + getTypeTotalModels('C-MPV') + getTypeTotalModels('D-MPV') + getTypeTotalModels('PCKP-S') + getTypeTotalModels('PCKP-M') + getTypeTotalModels('PCKP-L') + getTypeTotalModels('VUL');
-  let obj = { name: 'Autres (Ludospaces, Monospaces, Pick-up, Utilitaires)', models: models, diversityPercentage: getRoundedPercentage(models, totalModels) };
+  let models = getTypeTotalModels('PCKP-S') + getTypeTotalModels('PCKP-M') + getTypeTotalModels('PCKP-L') + getTypeTotalModels('VUL') + getTypeTotalModels('S');
+  let obj = { name: 'Autres (Pick-up, Utilitaires, Sportives)', models: models, diversityPercentage: getRoundedPercentage(models, totalModels) };
   return obj;
 }
 
@@ -248,8 +215,8 @@ const fillComprehensiveTypesDiversityData = () => {
   let urbansDiversityData = getUrbansDiversityData();
   COMPREHENSIVE_TYPES_DIVERSITY_DATA.push(urbansDiversityData);
 
-  let sportDiversityData = getSportDiversityData();
-  COMPREHENSIVE_TYPES_DIVERSITY_DATA.push(sportDiversityData);
+  let vansDiversityData = getVanDiversityData();
+  COMPREHENSIVE_TYPES_DIVERSITY_DATA.push(vansDiversityData);
 
   let othersDiversityData = getOthersDiversityData();
   COMPREHENSIVE_TYPES_DIVERSITY_DATA.push(othersDiversityData);
@@ -279,6 +246,7 @@ const onDataOrganizationChange = (organizationId) => {
         selectedOrganization = 'detailed';
         document.getElementById('tableContainer').innerHTML = getDetailedTableContainer();
         resizeTableHeaders();
+        resizeTopCarTableHeaders();
         break;
       default:
         break;
@@ -326,9 +294,9 @@ const getComprehensiveTableGUI = (dataArray) => {
   for (let index = 0; index < dataArray.length; index++) {
     const element = dataArray[index];
     str += `
-    <tr>
+    <tr class="segment-line">
       <td class="table-cell col-1"><div class="row-cell"><div class="dot" style="background-color: ${COLORS[index]};"></div>${element.type}</div></td>
-      <td class="table-cell col-2">${formatNumberWithSpaces(element.units)}</td>
+      <td class="table-cell col-2 units">${formatNumberWithSpaces(element.units)}</td>
       <td class="table-cell col-3">${element.salesPercentage}%</td>
       <td class="table-cell col-4">${element.models}</td>
       <td class="table-cell col-5">${element.diversityPercentage}%</td>
@@ -353,6 +321,8 @@ const getComprehensiveTableContainer = () => {
     Voitures neuves vendues en France en 2023<br>
     <span class="highlight">${formatNumberWithSpaces(totalUnits)}</span>
   </h1>
+  
+  <h2>Classement par segment</h2>
 
   <div class="progress-container">
     ${getProgressPartsForDataArray(COMPREHENSIVE_TYPES_SALES_DATA)}
@@ -403,9 +373,9 @@ const getDetailedTableGUI = (dataArray) => {
   for (let index = 0; index < dataArray.length; index++) {
     const element = dataArray[index];
     str += `
-    <tr>
+    <tr class="segment-line">
       <td class="table-cell col-1"><div class="row-cell"><div class="dot" style="background-color: ${COLORS[index]};"></div>${element.type}</div></td>
-      <td class="table-cell col-2">${formatNumberWithSpaces(element.units)}</td>
+      <td class="table-cell col-2 units">${formatNumberWithSpaces(element.units)}</td>
       <td class="table-cell col-3">${element.salesPercentage}%</td>
       <td class="table-cell col-4">${element.models}</td>
       <td class="table-cell col-5">${element.diversityPercentage}%</td>
@@ -420,6 +390,8 @@ const getDetailedTableContainer = () => {
     Voitures neuves vendues en France en 2023<br>
     <span class="highlight">${formatNumberWithSpaces(totalUnits)}</span>
   </h1>
+
+  <h2>Classement par segment</h2>
   
   <div class="progress-container">
     ${getProgressPartsForDataArray(DETAILED_TYPES_SALES_DATA)}
@@ -438,7 +410,41 @@ const getDetailedTableContainer = () => {
     <tbody>
       ${getDetailedTableGUI(getDetailedTableData())}
     </tbody>
-  </table>`;
+  </table>
+
+  <h2>Classement par modèle</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th id="col1TopCarHead">Modèle</th>
+        <th id="col2TopCarHead">Segment</th>
+        <th id="col3TopCarHead">Unités</th>
+        <th id="col4TopCarHead">%<br>des ventes</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${renderTopListGui()}
+    </tbody>
+  </table>
+  `;
+}
+
+const renderTopListGui = () => {
+  let str = '';
+  let sortedAllCars = ALL_CARS.sort((a, b) => {return b.units - a.units});
+  sortedAllCars.forEach(car => {
+    str += `
+      <tr class="car-line">
+        <td class="table-cell-top-car col-1 full-model-cell">
+          <span>${car.brand}</span><span style="font-weight: 800; display: flex; justify-content: flex-start; align-items: center;">${car.name}</span>
+        </td>
+        <td class="table-cell-top-car col-2">${formatNumberWithSpaces(car.type.name)}</td>
+        <td class="table-cell-top-car col-3 units">${formatNumberWithSpaces(car.units)}</td>
+        <td class="table-cell-top-car col-4">${getRoundedPercentage(car.units, totalUnits)}%</td>
+      </tr>`;
+  });
+  return str;
 }
 
 const resizeTableHeaders = () => {
@@ -446,6 +452,27 @@ const resizeTableHeaders = () => {
     const element = document.getElementById(`col${index}Head`);
 
     const rawCells = document.getElementsByClassName('table-cell');
+    let unfilteredCells = [];
+
+    for (let element of rawCells) {
+      unfilteredCells.push(element);
+    }
+    const cells = unfilteredCells.filter((e) => e.classList.contains(`col-${index}`));
+    const cell = cells[0];
+
+    const width = cell.offsetWidth;
+
+    element.style = `min-width: ${width}px; width: ${width}px; max-width: ${width}px;`;
+    
+  }
+}
+
+const resizeTopCarTableHeaders = () => {
+  for (let index = 1; index < 5; index++) {
+    const element = document.getElementById(`col${index}TopCarHead`);
+
+    const rawCells = document.getElementsByClassName('table-cell-top-car');
+    //console.log(rawCells);
     let unfilteredCells = [];
 
     for (let element of rawCells) {
@@ -472,7 +499,7 @@ console.table(DETAILED_TYPES_DIVERSITY_DATA);
 console.table(COMPREHENSIVE_TYPES_SALES_DATA);
 console.table(COMPREHENSIVE_TYPES_DIVERSITY_DATA); */
 
+fillColorsArray();
 document.getElementById('tableContainer').innerHTML = getComprehensiveTableContainer();
-resizeTableHeaders()
-
+resizeTableHeaders();
 

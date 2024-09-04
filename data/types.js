@@ -1,6 +1,6 @@
 export const TYPES = [
   /*  0 */ { id: 'A',      name: 'Petites citadines' },   // 3,40 à 3,70 m // 500, Aygo
-  /*  1 */ { id: 'B',      name: 'Citadines' },           // 3,70 à 4,10 m // A1, C3, 208, Clio, Corsa, Polo
+  /*  1 */ { id: 'B',      name: 'Citadines' },           // 3,70 à 4,20 m // A1, C3, 208, Clio, Corsa, Polo
   /*  2 */ { id: 'B-MPV',  name: 'Minispaces' },          // 3,80 à 4,30 m // C3 Picasso, 
   /*  3 */ { id: 'C',      name: 'Compactes' },           // 4,20 à 4,60 m // A3, C4, Focus, Astra, 308, Megane, Golf
   /*  4 */ { id: 'C-MPV',  name: 'Monospaces compacts' }, // 4,30 à 4,70 m // C4 Picasso, Scenic (l'ancien)
